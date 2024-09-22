@@ -1,38 +1,579 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: "ubuntu";
+  src: url(./assets/fonts/Ubuntu-Regular.ttf);
+  font-weight: 400;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: "ubuntu";
+  src: url(./assets/fonts/Ubuntu-Bold.ttf);
+  font-weight: 700;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@font-face {
+  font-family: "ubuntu";
+  src: url(./assets/fonts/Ubuntu-Medium.ttf);
+  font-style: 500;
 }
 
-.App-header {
-  background-color: #282c34;
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --clr-Marine-blue: hsl(213, 96%, 18%);
+  --clr-Purplish-blue: hsl(243, 100%, 62%);
+  --clr-Pastel-blue: hsl(228, 100%, 84%);
+  --clr-Light-blue: hsl(206, 94%, 87%);
+  --clr-Strawberry-red: hsl(354, 84%, 57%);
+
+  --clr--Cool-gray: hsl(231, 11%, 63%);
+  --clr--Light-gray: hsl(229, 24%, 87%);
+  --clr--Magnolia: hsl(217, 100%, 97%);
+  --clr--Alabaster: hsl(231, 100%, 99%);
+  --clr--White: hsl(0, 0%, 100%);
+
+  --fw-bold: 700;
+  --fw-regular: 400;
+  --fw-mediem: 500;
+
+  --ff: "ubuntu", sans-serif;
+  --fs-small : 0.825rem;
+  --fs-regular: 1rem;
+  --fs-medium: 1.2rem;
+  --fs-large: 2rem;
+}
+
+::placeholder {
+  font-weight: var(--fw-bold);
+  color: var(--clr--Cool-gray);
+}
+
+body {
   min-height: 100vh;
+  background-color: var(--clr--Magnolia);
+  position: relative;
+  font-family: var(--ff);
+  margin: 0;
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  width: 90%;
+  max-width: 900px;
+  background-color: var(--clr--White);
+  border-radius: 0.8rem;
+  padding: 1rem;
+}
+
+.content .steps {
+  display: flex;
+  width: 30%;
+  flex-direction: column;
+  gap: 1rem;
+  background-image: url(./assets/images/bg-sidebar-desktop.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 500px;
+  padding: 2rem;
+  color: white;
+  border-radius: 0.4rem;
+}
+
+.content .steps .step {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.content .steps .step .step-circle {
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 50%;
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--clr--Light-gray);
+}
+
+.content .steps .step .step-circle.active {
+  background-color: var(--clr-Light-blue);
+  color: var(--clr-Marine-blue);
+}
+
+.content .steps .step .step-info {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  text-transform: uppercase;
+  font-weight: var(--fw-mediem);
+}
+
+.content .steps .step .step-info .step-number {
+  font-size: var(--fs-small);
+  color: var(--clr--Light-gray);
+}
+
+.content .signup-form{
+  width: 70%;
+  /* background-color: red; */
+  padding: 1.5rem 5rem;
+  height: 500px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  color: var(--clr-Marine-blue);
+}
+
+.content .signup-form .form-info > h1{
+  font-size: var(--fs-large);
+  margin-bottom: .2rem;
+
+}
+
+.content .signup-form .form-info > p{
+  font-size: var(--fs-regular);
+  color: var(--clr--Cool-gray);
+}
+
+.content .signup-form .user-info {
+  margin-block: 2rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.content .signup-form .user-info .input-field {
+  display: flex;
+  gap: .5rem;
+  flex-direction: column;
+}
+
+.content .signup-form .user-info .input-field label {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-small);
+}
+
+.content .signup-form .user-info .input-field label span {
+  color: var(--clr-Strawberry-red);
+}
+
+.content .signup-form .user-info .input-field input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--clr--Light-gray);
+  border-radius: 0.4rem;
+  outline: 0;
+  color: var(--clr-Marine-blue);
+  font-family: var(--ff);
+  font-weight: var(--fw-bold);
+}
+
+.content .signup-form .user-info .input-field input:focus {
+  border: 1px solid var(--clr-Purplish-blue);
+}
+
+.content .signup-form .user-info .input-field input.error {
+  border: 1px solid var(--clr-Strawberry-red);
+}
+
+.content .signup-form .user-plan {
+  margin-block: 2rem;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  gap: 1rem;
+}
+
+.content .signup-form .user-plan .plan {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  flex: 1;
+  padding: 1rem;
+  gap: 3rem;
+  border: 1px solid var(--clr--Light-gray);
+  border-radius: 0.4rem;
+  justify-content: space-between;
+}
+
+.content .signup-form .user-plan .plan.selected-plan {
+  background-color: var(--clr--Alabaster);
+  border: 1px solid var(--clr-Purplish-blue);
+}
+
+.content .signup-form .user-plan .plan:hover ,.content .signup-form .user-add-ons .add-on:hover{
+  border: 1px solid var(--clr-Purplish-blue);
+}
+
+.content .signup-form .user-plan .plan h2 {
+  font-size: var(--fs-medium);
+}
+.content .signup-form .user-plan .plan p {
+  font-size: var(--fs-regular);
+  color: var(--clr--Cool-gray);
+}
+
+.content .signup-form .user-plan .details {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+}
+
+
+.content .signup-form .plan-selection {
+  display: flex;
+  gap: 2rem;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  align-items: center;
+  font-weight: var(--fw-bold);
+  background-color: var(--clr--Magnolia);
 }
 
-.App-link {
-  color: #61dafb;
+.content .signup-form .plan-selection .gray {
+  color: var(--clr--Cool-gray);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.content .signup-form .user-add-ons {
+  margin-block: 2rem;
+  display: grid;
+  gap: 1rem;
 }
+
+.content .signup-form .user-add-ons .add-on{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--clr--Light-gray);
+} 
+
+.content .signup-form .user-add-ons .add-on.checked {
+  background-color: var(--clr--Magnolia);
+  border: 1px solid var(--clr-Purplish-blue);
+}
+
+.content .signup-form .user-add-ons .add-on label {
+  padding-inline: .5rem 1.5rem;
+  display: flex;
+  align-items: center;
+
+}
+
+.content .signup-form .user-add-ons .add-on label input {
+  position: absolute;  /* Take the checkbox out of normal layout */
+  opacity: 0;          /* Make it invisible */
+  width: 0;            /* Remove its visual size */
+  height: 0;           /* Remove its visual size */
+}
+
+.content .signup-form .user-add-ons .add-on label .box {
+  width: 22px;
+  height: 22px;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  position: relative;
+  border: 1px solid var(--clr--Light-gray);
+}
+
+.content .signup-form .user-add-ons .add-on label .box::after {
+  position: absolute;
+  content: url(./assets/images/icon-checkmark.svg);
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.content .signup-form .user-add-ons .add-on label input:checked + .box {
+  background-color: var(--clr-Purplish-blue);
+}
+
+.content .signup-form .user-add-ons .add-on .add-on-details{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.content .signup-form .user-add-ons .add-on .add-on-details .add-on-info {
+  display: grid;
+  gap: 0.1rem;
+}
+.content .signup-form .user-add-ons .add-on .add-on-details .add-on-info span{
+  color: var(--clr--Cool-gray);
+}
+
+.content .signup-form .user-add-ons .add-on .add-on-details .add-on-price {
+  color: var(--clr-Purplish-blue);
+}
+
+.content .signup-form .user-summary {
+  margin-block: 2rem;
+  display: grid;
+}
+.content .signup-form .user-summary .user-summary-plan{
+  padding: 1.5rem;
+  gap: 1.5rem;
+  background-color: var(--clr--Alabaster);
+  border-radius: 0.5rem;
+  display: grid;
+}
+.content .signup-form .user-summary .user-summary-plan .plan-price{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.content .signup-form .user-summary .user-summary-plan .plan-price .user-summary-selected-plan span{
+  color: var(--clr--Cool-gray);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-small);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.content .signup-form .user-summary .user-summary-plan .plan-price .user-summary-selected-plan span:hover{
+  color: var(--clr-Purplish-blue);
+}
+.content .signup-form .user-summary .user-summary-plan .plan-price .summary-plan-price{
+  font-weight: var(--fw-bold);
+}
+.content .signup-form .user-summary .user-summary-plan .adds-services{
+  border-top: 1px solid var(--clr--Light-gray);
+  padding-top: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.content .signup-form .user-summary .user-summary-plan .adds-services .summary-service {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.content .signup-form .user-summary .user-summary-plan .adds-services .summary-service .service-name {
+  color: var(--clr--Cool-gray);
+  font-size: 0.9rem;
+}
+.content .signup-form .user-summary .user-summary-plan .adds-services .summary-service .service-price {
+  color: var(--clr-Marine-blue);
+  font-size: 0.8rem;
+}
+.content .signup-form .user-summary .user-payment{
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.content .signup-form .user-summary .user-payment .total{
+  color: var(--clr--Cool-gray);
+}
+.content .signup-form .user-summary .user-payment .total-price{
+  color: var(--clr-Purplish-blue);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-medium);
+}
+
+.content .signup-form .button-field {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  left: 5rem;
+  right: 5rem;
+  bottom: 1rem;
+  align-items: center;
+}
+
+.content .signup-form .button-field button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.4rem;
+  border: 0;
+  font-weight: var(--fw-bold);
+  cursor: pointer;
+}
+
+.content .signup-form .button-field .confirm-button,.content .signup-form .button-field .next-button{
+  margin-left: auto;
+  
+}
+
+.content .signup-form .button-field .confirm-button {
+  background-color: var(--clr-Purplish-blue);
+  color: var(--clr--White);
+}
+
+.content .signup-form .button-field .confirm-button:active{
+  opacity: 0.6;
+}
+
+.content .signup-form .button-field .next-button {
+  background-color: var(--clr-Marine-blue);
+  color: var(--clr--White);
+}
+.content .signup-form .button-field .back-button {
+  background-color: transparent;
+  color: var(--clr--Cool-gray);
+  padding-inline: 0;
+}
+
+.content .signup-form .button-field .back-button:hover {
+  color: var(--clr-Purplish-blue);
+}
+
+.content .signup-form .thanks {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding-block: 5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+
+
+
+
+/*  toggle button  */
+
+/* From Uiverse.io by namecho */ 
+.switch {
+  margin-top: 5px;
+  cursor: pointer;
+  --button-width: 2.3rem;         /* Slightly larger from 1.75rem */
+  --button-height: 1.2rem;        /* Slightly larger from 1rem */
+  --toggle-diameter: 0.8rem;      /* Slightly larger from 0.75rem */
+  --button-toggle-offset: calc((var(--button-height) - var(--toggle-diameter)) / 2); /* Recalculated */
+  --toggle-shadow-offset: 6px;    /* Increased from 5px */
+  --toggle-wider: 1.8rem;         /* Slightly larger from 1.5rem */
+  --color-grey: #cccccc;          /* Colors remain the same */
+  --color-green: var(--clr-Marine-blue);         /* Colors remain the same */
+}
+
+
+ 
+ .slider {
+  display: inline-block;
+  width: var(--button-width);
+  height: var(--button-height);
+  background-color: var(--color-green);
+  border-radius: calc(var(--button-height) / 2);
+  position: relative;
+  transition: 0.3s all ease-in-out;
+ }
+ 
+ .slider::after {
+  content: "";
+  display: inline-block;
+  width: var(--toggle-diameter);
+  height: var(--toggle-diameter);
+  background-color: #fff;
+  border-radius: calc(var(--toggle-diameter) / 2);
+  position: absolute;
+  top: var(--button-toggle-offset);
+  transform: translateX(var(--button-toggle-offset));
+  box-shadow: var(--toggle-shadow-offset) 0 calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, 0.1);
+  transition: 0.3s all ease-in-out;
+ }
+ 
+ .switch input[type="checkbox"]:checked + .slider {
+  background-color: var(--color-green);
+ }
+ 
+ .switch input[type="checkbox"]:checked + .slider::after {
+  transform: translateX(calc(var(--button-width) - var(--toggle-diameter) - var(--button-toggle-offset)));
+  box-shadow: calc(var(--toggle-shadow-offset) * -1) 0 calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, 0.1);
+ }
+ 
+ .switch input[type="checkbox"] {
+  display: none;
+ }
+ 
+ .switch input[type="checkbox"]:active + .slider::after {
+  width: var(--toggle-wider);
+ }
+ 
+ .switch input[type="checkbox"]:checked:active + .slider::after {
+  transform: translateX(calc(var(--button-width) - var(--toggle-wider) - var(--button-toggle-offset)));
+ }
+
+ 
+ /*  yoggle button */
+
+
+ /* media querry */
+
+ @media screen and (max-width : 600px ){
+  .content {
+    width: 100%;
+    flex-direction: column;
+    padding: 0;
+    position: static;
+    transform: none;
+    height: 100vh;
+    background-color: var(--clr--Magnolia);
+}
+  .content .steps {
+    background-image: url(./assets/images/bg-sidebar-mobile.svg);
+    height: 200px;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: center;
+    border-radius: 0;
+    flex-direction: row;
+  }
+  .content .signup-form {
+    width: 100%;
+    height: 100%;
+    position: static;
+    padding: 1rem;
+  }
+  .content .signup-form .upper-info{
+    padding: 1.5rem;
+    width: 100%;
+    transform: translateY(-5rem);
+    border-radius: 0.7rem;
+    display: grid;
+    
+    background-color: var(--clr--White);
+}
+  .content .signup-form .user-info {
+    gap: 1rem;
+  }
+  .content .signup-form .button-field {
+    background-color: white;
+    width: 100%;
+    left: 0;
+    padding: 1rem;
+    bottom: 0;   
+  }
+  .content .signup-form .user-info ,
+  .content .signup-form .user-plan{
+    margin-block: 1rem;
+  }
+
+  
+.content .signup-form .user-plan {
+  flex-direction: column;
+}
+.content .signup-form .user-plan .plan {
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+.content .signup-form .thanks svg {
+  font-size: 20px;
+}
+  
+ }
