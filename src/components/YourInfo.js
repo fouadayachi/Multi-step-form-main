@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import Button from "./Button";
+import { Context } from "./Context";
 
-export default function YourInfo({ step, formData, handleInputChange,handleStepChange,handleSubmit,formErrors }) {
+export default function YourInfo() {
+  const {formData,formErrors,handleSubmit,handleInputChange} = useContext(Context);
   return (
     <div className="signup-form">
       <form onSubmit={handleSubmit} noValidate>
@@ -48,7 +51,7 @@ export default function YourInfo({ step, formData, handleInputChange,handleStepC
             </div>
           </div>
         </div>
-        <Button step={step} handleStepChange={handleStepChange} />
+        <Button />
       </form>
     </div>
   );

@@ -1,7 +1,10 @@
 import Button from "./Button";
+import { useContext } from "react";
+import { Context } from "./Context";
 
 
-export default function AddOns({ step, handleStepChange, isYear,adds,handleToggleService,handleSubmit3 }) {
+export default function AddOns() {
+  const {isYear,handleSubmit3,adds,handleToggleService} = useContext(Context);
   return (
     <div className="signup-form">
       <form noValidate onSubmit={handleSubmit3}>
@@ -36,7 +39,7 @@ export default function AddOns({ step, handleStepChange, isYear,adds,handleToggl
             })}
           </div>
         </div>
-        <Button step={step} handleStepChange={handleStepChange} />
+        <Button  />
       </form>
     </div>
   );

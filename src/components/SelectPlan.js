@@ -1,7 +1,10 @@
 import Button from "./Button";
 import plans from "./plans";
+import { useContext } from "react";
+import { Context } from "./Context";
 
-export default function SelectPlan({ step,handleStepChange,isYear,handlePlanSelect,selectedPlan,handleToggleYear ,handleSubmit2}) {
+export default function SelectPlan() {
+  const {isYear,handlePlanSelect,selectedPlan,handleToggleYear,handleSubmit2} = useContext(Context);
   return (
     <div className="signup-form">
       <form noValidate onSubmit={handleSubmit2}>
@@ -35,7 +38,7 @@ export default function SelectPlan({ step,handleStepChange,isYear,handlePlanSele
             <span className={!isYear && "gray"}>Yearly</span>
           </div>
         </div>
-        <Button step={step} handleStepChange={handleStepChange} />
+        <Button/>
       </form>
     </div>
   );

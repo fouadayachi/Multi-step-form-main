@@ -1,13 +1,9 @@
 import Button from "./Button";
+import { useContext } from "react";
+import { Context } from "./Context";
 
-export default function Summary({
-  step,
-  handleStepChange,
-  isYear,
-  selectedPlan,
-  services,
-  handleSubmit4
-}) {
+export default function Summary({ services }) {
+  const { handleStepChange, isYear, selectedPlan, handleSubmit4 } = useContext(Context);
   function calcTotalPrice() {
     let totalPrice = isYear ? selectedPlan.priceYear : selectedPlan.priceMonth;
     for (let x of services) {
@@ -54,14 +50,16 @@ export default function Summary({
               )}
             </div>
             <div className="user-payment">
-              <span className="total">Total(per {isYear ? "year" : "month"})</span>
+              <span className="total">
+                Total(per {isYear ? "year" : "month"})
+              </span>
               <span className="total-price">
                 +${calcTotalPrice()}/{isYear ? "yr" : "mo"}
               </span>
             </div>
           </div>
         </div>
-        <Button step={step} handleStepChange={handleStepChange} />
+        <Button  />
       </form>
     </div>
   );

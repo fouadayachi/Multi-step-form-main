@@ -9,6 +9,7 @@ import AddOns from "./components/AddOns";
 import adds from "./components/Adds";
 import Summary from "./components/Summary";
 import Thanks from "./components/Thanks";
+import { Context } from "./components/Context";
 
 function App() {
   const [step, setStep] = useState(1);
@@ -20,7 +21,7 @@ function App() {
   });
   const [formErrors, setFormErrors] = useState({});
   const [isYear, setIsYear] = useState(false);
-  const [submitted,setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(plans[0]);
   const [services, setServices] = useState(adds);
 
@@ -35,10 +36,8 @@ function App() {
     }
   };
   const handleStepChange = (num) => {
-    if(num > 1)
-        setStep(num);
-    else  
-        setStep((step) => step + num);
+    if (num > 1) setStep(num);
+    else setStep((step) => step + num);
   };
 
   const handleSubmit = (e) => {
@@ -95,18 +94,33 @@ function App() {
   return (
     <div className="content">
       <Steps isMobile={isMobile} step={step} />
-      {(step === 1 && !submitted) && <YourInfo
-        step={step}
-        formData={formData}
-        handleInputChange={handleInputChange}
-        handleStepChange={handleStepChange}
-        handleSubmit={handleSubmit}
-        formErrors={formErrors}
-      />}
-      {(step === 2 && !submitted) && <SelectPlan step={step} handleStepChange={handleStepChange} isYear={isYear} handlePlanSelect={handlePlanSelect} selectedPlan={selectedPlan} handleToggleYear={handleToggleYear} handleSubmit2={handleSubmit2}/>}
-      {(step === 3 && !submitted) && <AddOns step={step} handleStepChange={handleStepChange} isYear={isYear} adds={services}  handleToggleService={handleToggleService}  handleSubmit3={handleSubmit3}/>}
-      {(step === 4 && !submitted) && <Summary step={step} handleStepChange={handleStepChange} isYear={isYear} selectedPlan={selectedPlan} services={services.filter(service => service.check)} handleSubmit4={handleSubmit4}/>}
-      {submitted && <Thanks />}
+      <Context.Provider
+        value={{
+          step,
+          formData,
+          handleInputChange,
+          handleStepChange,
+          handleSubmit,
+          handleSubmit2,
+          formErrors,
+          isYear,
+          handlePlanSelect,
+          selectedPlan,
+          handleToggleYear,
+          handleSubmit3,
+          handleToggleService,
+          adds: services,
+          handleSubmit4,
+        }}
+      >
+        {step === 1 && !submitted && <YourInfo />}
+        {step === 2 && !submitted && <SelectPlan />}
+        {step === 3 && !submitted && <AddOns />}
+        {step === 4 && !submitted && (
+          <Summary services={services.filter((service) => service.check)} />
+        )}
+        {submitted && <Thanks />}
+      </Context.Provider>
     </div>
   );
 }
